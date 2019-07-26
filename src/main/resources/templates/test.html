@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../weui/css/jquery-weui.min.css"/>
+    <script src="../weui/js/jquery.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-resource-1.3.4.js"></script>
+</head>
+<body>
+<input type="button" value="提交" onclick="fun()">
+<div id="dd">
+    {{msg}}
+    <div v-for="(item,i) in list" :key="i">
+        <p><span>{{ item.CHECKED_ID}}</span>、<span>{{ item.NAME }}</span></p>
+    </div>
+</div>
+<input type="text" v-model="">
+<script>
+    var vm = new Vue({
+        el: '#dd',
+        data: {
+            msg: 'Hello Vue!',
+            list:[]
+        },
+        methods:{
+            getList(){
+                this.$http.get("../checkContent/getCheckContent").then(function (result) {
+                    console.log(result);
+                    if(result.body.code === 0){
+                        vm.list = result.body.data
+                    }else {
+                        alert("获取失败")
+                    }
+                })
+            }
+        },
+        created:function () {
+            this.getList()
+        }
+    })
+
+</script>
+</body>
+</html>
