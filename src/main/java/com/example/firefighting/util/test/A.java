@@ -51,5 +51,6 @@ public class A {
         System.out.println(checkRecord.toString());
         Result post = PutDataUtil.postByObj(PutData.FIRE_QIN_T.getUrl(),checkRecord);
         System.out.println(post);
+        System.out.println("jjk");
     }
 }
